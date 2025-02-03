@@ -3,5 +3,6 @@
   "appFolders": [],
   "testFolders": [],
   "bcptTestFolders": [],
-  "artifact": "//*//first"
+  "artifact": "//*//first",
+  "generateDependencyArtifact": true
 }
