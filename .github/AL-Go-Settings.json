@@ -2,6 +2,7 @@
   "type": "PTE",
   "templateUrl": "https://github.com/spetersenms/AL-Go@DeployTestAppsToSandbox",
   "templateSha": "012eddacb14fd46393377e2f732572c4d01bc574",
+  "generateDependencyArtifact": true,
   "DeployTospetersen_demo": {
     "includeTestAppsInSandboxEnvironment": true
   }
