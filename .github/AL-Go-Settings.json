@@ -4,6 +4,7 @@
   "templateSha": "c0ce86475a8eb5c4bf16019b94421ff21099bd3e",
   "generateDependencyArtifact": true,
   "DeployTospetersen_demo": {
-    "includeTestAppsInSandboxEnvironment": true
+    "includeTestAppsInSandboxEnvironment": true,
+    "Branches": "*"
   }
 }
