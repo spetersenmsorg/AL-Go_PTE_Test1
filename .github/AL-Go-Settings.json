@@ -5,6 +5,6 @@
   "generateDependencyArtifact": true,
   "DeployTospetersen_demo": {
     "includeTestAppsInSandboxEnvironment": true,
-    "excludeAppIds": ["431bf37c-5fcb-4e7b-8e2d-8d2b15e9be66"]
+    "excludeAppIds": []
   }
 }
