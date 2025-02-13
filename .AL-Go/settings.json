@@ -4,5 +4,6 @@
   "testFolders": [],
   "bcptTestFolders": [],
   "artifact": "//*//first",
-  "generateDependencyArtifact": true
+  "generateDependencyArtifact": true,
+  "pageScriptingTests": [ "Recordings" ]
 }
