@@ -5,5 +5,8 @@
   "bcptTestFolders": [],
   "artifact": "//*//first",
   "generateDependencyArtifact": true,
-  "pageScriptingTests": [ "Recordings" ]
+  "useCompilerFolder": true,
+  "doNotPublishApps": false,
+  "doNotRunTests": true,
+  "doNotRunBcptTests": true
 }
