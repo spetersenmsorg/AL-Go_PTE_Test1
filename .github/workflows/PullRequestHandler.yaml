@@ -28,7 +28,7 @@ jobs:
     if: (github.event.pull_request.base.repo.full_name != github.event.pull_request.head.repo.full_name) && (github.event_name != 'pull_request')
     runs-on: windows-latest
     steps:
-      - uses: spetersenms/AL-Go/Actions/VerifyPRChanges@PageScriptReporter
+      - uses: spetersenms/AL-Go/Actions/VerifyPRChanges@DeployTestAppsToSandbox
 
   Initialization:
     needs: [ PregateCheck ]
@@ -44,7 +44,7 @@ jobs:
       telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
     steps:
       - name: Dump Workflow Information
-        uses: spetersenms/AL-Go/Actions/DumpWorkflowInfo@PageScriptReporter
+        uses: spetersenms/AL-Go/Actions/DumpWorkflowInfo@DeployTestAppsToSandbox
         with:
           shell: powershell
 
@@ -56,13 +56,13 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: spetersenms/AL-Go/Actions/WorkflowInitialize@PageScriptReporter
+        uses: spetersenms/AL-Go/Actions/WorkflowInitialize@DeployTestAppsToSandbox
         with:
           shell: powershell
 
       - name: Read settings
         id: ReadSettings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@PageScriptReporter
+        uses: spetersenms/AL-Go/Actions/ReadSettings@DeployTestAppsToSandbox
         with:
           shell: powershell
           get: shortLivedArtifactsRetentionDays
@@ -75,7 +75,7 @@ jobs:
 
       - name: Determine Projects To Build
         id: determineProjectsToBuild
-        uses: spetersenms/AL-Go/Actions/DetermineProjectsToBuild@PageScriptReporter
+        uses: spetersenms/AL-Go/Actions/DetermineProjectsToBuild@DeployTestAppsToSandbox
         with:
           shell: powershell
           maxBuildDepth: ${{ env.workflowDepth }}
@@ -111,7 +111,7 @@ jobs:
     steps:
       - name: Pull Request Status Check
         id: PullRequestStatusCheck
-        uses: spetersenms/AL-Go/Actions/PullRequestStatusCheck@PageScriptReporter
+        uses: spetersenms/AL-Go/Actions/PullRequestStatusCheck@DeployTestAppsToSandbox
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -119,7 +119,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: spetersenms/AL-Go/Actions/WorkflowPostProcess@PageScriptReporter
+        uses: spetersenms/AL-Go/Actions/WorkflowPostProcess@DeployTestAppsToSandbox
         if: success() || failure()
         env:
           GITHUB_TOKEN: ${{ github.token }}
