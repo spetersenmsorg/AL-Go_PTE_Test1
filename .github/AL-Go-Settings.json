@@ -1,11 +1,15 @@
 {
   "type": "PTE",
-  "templateUrl": "https://github.com/spetersenms/AL-Go@DeployTestAppsToSandbox",
-  "templateSha": "b65d2d2c18d47fed192d70efa62e79bb73638d7f",
+  "templateUrl": "https://github.com/spetersenms/AL-Go@PageScriptReporter",
+  "templateSha": "01aceb36346b0f5c0cb5dc43c89cd045102879aa",
   "generateDependencyArtifact": true,
   "DeployTospetersen_demo": {
-    "Branches": ["*"],
+    "Branches": [
+      "*"
+    ],
     "includeTestAppsInSandboxEnvironment": true,
-    "excludeAppIds": ["7aca38fb-3df6-4b2a-a7c4-3b2a60ee0574"]
+    "excludeAppIds": [
+      "7aca38fb-3df6-4b2a-a7c4-3b2a60ee0574"
+    ]
   }
 }
