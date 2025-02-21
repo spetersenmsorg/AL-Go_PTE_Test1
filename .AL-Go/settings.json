@@ -4,9 +4,5 @@
   "testFolders": [],
   "bcptTestFolders": [],
   "artifact": "//*//first",
-  "generateDependencyArtifact": true,
-  "useCompilerFolder": true,
-  "doNotPublishApps": false,
-  "doNotRunTests": true,
-  "doNotRunBcptTests": true
+  "generateDependencyArtifact": true
 }
