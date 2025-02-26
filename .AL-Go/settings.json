@@ -1,6 +1,9 @@
 {
   "country": "us",
-  "appFolders": [],
+  "appFolders": [
+    "./app1",
+    "./app2"
+  ],
   "testFolders": [],
   "bcptTestFolders": [],
   "artifact": "//*//first",
