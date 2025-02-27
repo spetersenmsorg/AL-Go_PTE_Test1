@@ -99,7 +99,7 @@ jobs:
           lfs: true
 
       - name: Read settings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@DeployFromPR
+        uses: freddydk/AL-Go/Actions/ReadSettings@incbug
         with:
           shell: ${{ inputs.shell }}
           project: ${{ inputs.project }}
@@ -108,7 +108,7 @@ jobs:
 
       - name: Determine whether to build project
         id: DetermineBuildProject
-        uses: spetersenms/AL-Go/Actions/DetermineBuildProject@DeployFromPR
+        uses: freddydk/AL-Go/Actions/DetermineBuildProject@incbug
         with:
           shell: ${{ inputs.shell }}
           skippedProjectsJson: ${{ inputs.skippedProjectsJson }}
@@ -118,7 +118,7 @@ jobs:
       - name: Read secrets
         id: ReadSecrets
         if: steps.DetermineBuildProject.outputs.BuildIt == 'True' && github.event_name != 'pull_request'
-        uses: spetersenms/AL-Go/Actions/ReadSecrets@DeployFromPR
+        uses: freddydk/AL-Go/Actions/ReadSecrets@incbug
         with:
           shell: ${{ inputs.shell }}
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -136,7 +136,7 @@ jobs:
       - name: Determine ArtifactUrl
         id: determineArtifactUrl
         if: steps.DetermineBuildProject.outputs.BuildIt == 'True'
-        uses: spetersenms/AL-Go/Actions/DetermineArtifactUrl@DeployFromPR
+        uses: freddydk/AL-Go/Actions/DetermineArtifactUrl@incbug
         with:
           shell: ${{ inputs.shell }}
           project: ${{ inputs.project }}
@@ -151,7 +151,7 @@ jobs:
       - name: Download Project Dependencies
         id: DownloadProjectDependencies
         if: steps.DetermineBuildProject.outputs.BuildIt == 'True'
-        uses: spetersenms/AL-Go/Actions/DownloadProjectDependencies@DeployFromPR
+        uses: freddydk/AL-Go/Actions/DownloadProjectDependencies@incbug
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -162,7 +162,7 @@ jobs:
           baselineWorkflowRunId: ${{ inputs.baselineWorkflowRunId }}
 
       - name: Build
-        uses: spetersenms/AL-Go/Actions/RunPipeline@DeployFromPR
+        uses: freddydk/AL-Go/Actions/RunPipeline@incbug
         if: steps.DetermineBuildProject.outputs.BuildIt == 'True'
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
@@ -180,7 +180,7 @@ jobs:
       - name: Sign
         id: sign
         if: steps.DetermineBuildProject.outputs.BuildIt == 'True' && inputs.signArtifacts && env.doNotSignApps == 'False' && (env.keyVaultCodesignCertificateName != '' || (fromJson(env.trustedSigning).Endpoint != '' && fromJson(env.trustedSigning).Account != '' && fromJson(env.trustedSigning).CertificateProfile != ''))
-        uses: spetersenms/AL-Go/Actions/Sign@DeployFromPR
+        uses: freddydk/AL-Go/Actions/Sign@incbug
         with:
           shell: ${{ inputs.shell }}
           azureCredentialsJson: '${{ fromJson(steps.ReadSecrets.outputs.Secrets).AZURE_CREDENTIALS }}'
@@ -188,7 +188,7 @@ jobs:
 
       - name: Calculate Artifact names
         id: calculateArtifactsNames
-        uses: spetersenms/AL-Go/Actions/CalculateArtifactNames@DeployFromPR
+        uses: freddydk/AL-Go/Actions/CalculateArtifactNames@incbug
         if: success() || failure()
         with:
           shell: ${{ inputs.shell }}
@@ -274,14 +274,14 @@ jobs:
       - name: Analyze Test Results
         id: analyzeTestResults
         if: (success() || failure()) && env.doNotRunTests == 'False' && ((hashFiles(format('{0}/.buildartifacts/TestResults.xml',inputs.project)) != '') || (hashFiles(format('{0}/.buildartifacts/bcptTestResults.json',inputs.project)) != ''))
-        uses: spetersenms/AL-Go/Actions/AnalyzeTests@DeployFromPR
+        uses: freddydk/AL-Go/Actions/AnalyzeTests@incbug
         with:
           shell: ${{ inputs.shell }}
           project: ${{ inputs.project }}
 
       - name: Cleanup
         if: always()
-        uses: spetersenms/AL-Go/Actions/PipelineCleanup@DeployFromPR
+        uses: freddydk/AL-Go/Actions/PipelineCleanup@incbug
         with:
           shell: ${{ inputs.shell }}
           project: ${{ inputs.project }}

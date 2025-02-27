@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       templateUrl:
-        description: Template Repository URL (current is https://github.com/spetersenms/AL-Go@DeployFromPR)
+        description: Template Repository URL (current is https://github.com/freddydk/AL-Go@incbug)
         required: false
         default: ''
       downloadLatest:
@@ -36,7 +36,7 @@ jobs:
     runs-on: [ windows-latest ]
     steps:
       - name: Dump Workflow Information
-        uses: spetersenms/AL-Go/Actions/DumpWorkflowInfo@DeployFromPR
+        uses: freddydk/AL-Go/Actions/DumpWorkflowInfo@incbug
         with:
           shell: powershell
 
@@ -45,19 +45,19 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: spetersenms/AL-Go/Actions/WorkflowInitialize@DeployFromPR
+        uses: freddydk/AL-Go/Actions/WorkflowInitialize@incbug
         with:
           shell: powershell
 
       - name: Read settings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@DeployFromPR
+        uses: freddydk/AL-Go/Actions/ReadSettings@incbug
         with:
           shell: powershell
           get: templateUrl
 
       - name: Read secrets
         id: ReadSecrets
-        uses: spetersenms/AL-Go/Actions/ReadSecrets@DeployFromPR
+        uses: freddydk/AL-Go/Actions/ReadSecrets@incbug
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -93,7 +93,7 @@ jobs:
           Add-Content -Encoding UTF8 -Path $env:GITHUB_ENV -Value "downloadLatest=$downloadLatest"
 
       - name: Update AL-Go system files
-        uses: spetersenms/AL-Go/Actions/CheckForUpdates@DeployFromPR
+        uses: freddydk/AL-Go/Actions/CheckForUpdates@incbug
         with:
           shell: powershell
           token: ${{ fromJson(steps.ReadSecrets.outputs.Secrets).ghTokenWorkflow }}
@@ -104,7 +104,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: spetersenms/AL-Go/Actions/WorkflowPostProcess@DeployFromPR
+        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@incbug
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
