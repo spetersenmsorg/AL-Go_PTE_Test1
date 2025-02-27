@@ -3,6 +3,8 @@
   "templateUrl": "https://github.com/freddydk/AL-Go@incbug",
   "templateSha": "ae1cc979ca23b6833e005dff1fd0a67dc98a706c",
   "generateDependencyArtifact": true,
+  "useCompilerFolder": true,
+  "doNotPublishApps": true,
   "DeployTospetersen_demo": {
     "Branches": [
       "*"
