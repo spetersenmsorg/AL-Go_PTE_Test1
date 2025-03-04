@@ -13,6 +13,9 @@
       "path": "app2"
     },
     {
+      "path": "test-app-with-dashes"
+    },
+    {
       "path": ".AL-Go"
     }
   ],
