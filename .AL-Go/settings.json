@@ -2,7 +2,8 @@
   "country": "us",
   "appFolders": [
     "./app1",
-    "./app2"
+    "./app2",
+    "test_app_with_underscores"
   ],
   "testFolders": [],
   "bcptTestFolders": [],
