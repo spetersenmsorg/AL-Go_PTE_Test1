@@ -1,7 +1,7 @@
 {
   "type": "PTE",
-  "templateUrl": "https://github.com/spetersenms/AL-Go@DeployFromPR",
-  "templateSha": "a55e528909e141206741ce60cf91cc624c6ffb31",
+  "templateUrl": "https://github.com/spetersenms/AL-Go@FixDownloadedAppsPublished",
+  "templateSha": "9c438e0dbac114cfac8ced19a86bfb1a41ad2075",
   "generateDependencyArtifact": true,
   "DeployTospetersen_demo": {
     "Branches": [
