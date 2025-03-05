@@ -1,7 +1,7 @@
 {
   "type": "PTE",
   "templateUrl": "https://github.com/freddydk/AL-Go@incbug",
-  "templateSha": "ae1cc979ca23b6833e005dff1fd0a67dc98a706c",
+  "templateSha": "f4ac19631f5409df2daaab664ddd40a130cb0e6d",
   "generateDependencyArtifact": true,
   "useCompilerFolder": true,
   "doNotPublishApps": true,
