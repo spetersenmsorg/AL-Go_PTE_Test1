@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       templateUrl:
-        description: Template Repository URL (current is https://github.com/spetersenms/AL-Go@FixDownloadedAppsPublished)
+        description: Template Repository URL (current is https://github.com/spetersenms/AL-Go@DeployFromPR)
         required: false
         default: ''
       downloadLatest:
@@ -46,29 +46,28 @@ jobs:
 
       - name: Read settings
         id: ReadSettings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@FixDownloadedAppsPublished
+        uses: spetersenms/AL-Go/Actions/ReadSettings@DeployFromPR
         with:
           shell: powershell
           get: templateUrl
 
       - name: Get Workflow Multi-Run Branches
         id: GetBranches
-        uses: spetersenms/AL-Go/Actions/GetWorkflowMultiRunBranches@FixDownloadedAppsPublished
+        uses: spetersenms/AL-Go/Actions/GetWorkflowMultiRunBranches@DeployFromPR
         with:
           shell: powershell
           includeBranches: ${{ github.event.inputs.includeBranches }}
 
       - name: Determine Template URL
         id: DetermineTemplateUrl
-        shell: powershell
+        env:
+          TemplateUrlAsInput: '${{ github.event.inputs.templateUrl }}'
         run: |
             $templateUrl = $env:templateUrl # Available from ReadSettings step
-            $templateUrlAsInput = '${{ github.event.inputs.templateUrl }}'
-            if ($templateUrlAsInput) {
+            if ($ENV:TemplateUrlAsInput) {
               # Use the input value if it is provided
-              $templateUrl = $templateUrlAsInput
+              $templateUrl = $ENV:TemplateUrlAsInput
             }
-
             Write-Host "Using template URL: $templateUrl"
             Add-Content -Encoding UTF8 -Path $env:GITHUB_OUTPUT -Value "TemplateUrl=$templateUrl"
 
@@ -83,7 +82,7 @@ jobs:
 
     steps:
       - name: Dump Workflow Information
-        uses: spetersenms/AL-Go/Actions/DumpWorkflowInfo@FixDownloadedAppsPublished
+        uses: spetersenms/AL-Go/Actions/DumpWorkflowInfo@DeployFromPR
         with:
           shell: powershell
 
@@ -94,19 +93,19 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: spetersenms/AL-Go/Actions/WorkflowInitialize@FixDownloadedAppsPublished
+        uses: spetersenms/AL-Go/Actions/WorkflowInitialize@DeployFromPR
         with:
           shell: powershell
 
       - name: Read settings
-        uses: spetersenms/AL-Go/Actions/ReadSettings@FixDownloadedAppsPublished
+        uses: spetersenms/AL-Go/Actions/ReadSettings@DeployFromPR
         with:
           shell: powershell
           get: commitOptions
 
       - name: Read secrets
         id: ReadSecrets
-        uses: spetersenms/AL-Go/Actions/ReadSecrets@FixDownloadedAppsPublished
+        uses: spetersenms/AL-Go/Actions/ReadSecrets@DeployFromPR
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -118,17 +117,14 @@ jobs:
           downloadLatest: '${{ github.event.inputs.downloadLatest }}'
         run: |
           $errorActionPreference = "Stop"; $ProgressPreference = "SilentlyContinue"; Set-StrictMode -Version 2.0
-
           if('${{ github.event_name }}' -eq 'workflow_dispatch') {
             Write-Host "Using inputs from workflow_dispatch event"
-
             $directCommit = $env:directCommit
             $downloadLatest = $env:downloadLatest
           }
           else {
             Write-Host "Using inputs from commitOptions setting"
             $commitOptions = $env:commitOptions | ConvertFrom-Json # Available from ReadSettings step
-
             $directCommit=$(-not $commitOptions.createPullRequest)
             $downloadLatest=$true
           }
@@ -136,7 +132,7 @@ jobs:
           Add-Content -Encoding UTF8 -Path $env:GITHUB_ENV -Value "downloadLatest=$downloadLatest"
 
       - name: Update AL-Go system files
-        uses: spetersenms/AL-Go/Actions/CheckForUpdates@FixDownloadedAppsPublished
+        uses: spetersenms/AL-Go/Actions/CheckForUpdates@DeployFromPR
         with:
           shell: powershell
           token: ${{ fromJson(steps.ReadSecrets.outputs.Secrets).ghTokenWorkflow }}
@@ -148,7 +144,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: spetersenms/AL-Go/Actions/WorkflowPostProcess@FixDownloadedAppsPublished
+        uses: spetersenms/AL-Go/Actions/WorkflowPostProcess@DeployFromPR
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
