@@ -3,6 +3,8 @@
   "templateUrl": "https://github.com/spetersenms/AL-Go@DeployFromPR",
   "templateSha": "a5acf9c308edae30aefffee20991b51e9802d3dd",
   "generateDependencyArtifact": true,
+  "testFolders": [],
+  "bcptTestFolders": [],
   "pageScriptingTests": [ "Recordings" ],
   "DeployTospetersen_demo": {
     "Branches": [
