@@ -4,8 +4,9 @@
     "./app1",
     "./app2"
   ],
-  "testFolders": [],
-  "bcptTestFolders": [],
+  "testFolders": [ "app1.Test" ],
+  "bcptTestFolders": [ "app1.PerformanceTest" ],
+  "pageScriptingTests": [ "Recordings" ],
   "artifact": "//*//first",
   "generateDependencyArtifact": true
 }
