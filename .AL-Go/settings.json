@@ -4,8 +4,6 @@
     "./app1",
     "./app2"
   ],
-  "testFolders": [],
-  "bcptTestFolders": [],
   "artifact": "//*//first",
   "generateDependencyArtifact": true
 }
