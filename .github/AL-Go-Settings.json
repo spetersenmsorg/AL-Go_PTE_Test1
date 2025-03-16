@@ -8,7 +8,9 @@
       "*"
     ],
     "includeTestAppsInSandboxEnvironment": true,
-    "excludeAppIds": []
+    "excludeAppIds": [
+      "7aca38fb-3df6-4b2a-a7c4-3b2a60ee0574"
+    ]
   },
   "incrementalBuilds": {
     "onPush": true,
