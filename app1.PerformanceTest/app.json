@@ -2,7 +2,7 @@
   "id": "431bf37c-5fcb-4e7b-8e2d-8d2b15e9be66",
   "name": "app1.PerformanceTest",
   "publisher": "spetersenProductions",
-  "version": "1.0.0.0",
+  "version": "1.1.0.0",
   "brief": "Performance Toolkit Samples (W1)",
   "description": "This extension provides tests that simulate business processes, such as creating sales orders, for the Business Central Performance Toolkit. Developers can use these to test for performance regressions during development.",
   "platform": "1.0.0.0",
