@@ -1,7 +1,7 @@
 {
   "type": "PTE",
   "templateUrl": "https://github.com/spetersenms/AL-Go@Test1MBJobSummary",
-  "templateSha": "9383511ce1296969fe17c3c6833d3b31e56e16fc",
+  "templateSha": "e1d7083a8388c035afa2ba258e4fd1b63c8d8235",
   "generateDependencyArtifact": true,
   "DeployTospetersen_demo": {
     "Branches": [
